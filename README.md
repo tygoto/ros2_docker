@@ -1,4 +1,4 @@
-# dockerでros2の実行環境を準備
+# dockerでros2の実行環境を構築
 
 ### 1. ros2 dashingのコンテナイメージを作成
 

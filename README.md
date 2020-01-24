@@ -1,31 +1,48 @@
 # dockerでros2の実行環境を構築
 
-### 1. ros2 dashingのコンテナイメージを作成
+## Xサーバの準備
+
+### Windowsの場合
+
+### Macの場合
+
+
+## コンテナの準備
+
+### 1. 必要なファイルを取得
 
 ```bash
-$ cd ros2
-$ docker build --tag ros2:dashing .
+$ git clone https://github.com/tygoto/ros2_docker.git
+$ cd ros2_docker
 ```
 
-### 2. turtulebotのコンテナイメージを作成
+### 2. ros2 dashingのDockerイメージを作成
 
 ```bash
-$ cd turtlebot3
-$ docker build --tag turtlebot3 .
+$ docker build --tag ros2:dashing ros2
 ```
 
-### 3. コンテナを起動
+### 3. turtulebotのDockerイメージを作成
 
 ```bash
+$ docker build --tag turtlebot3 turtlebot3
+```
+
+### 4. コンテナを起動
+
+```bash
+$ xhost local:
 $ docker-compose up
 ```
 
-- 終了する場合
-```bash
-$ docker-compose down
-```
-
-### 4. コンテナに入る
+### 5. コンテナに入る
 ```bash
 $ docker exec -it <コンテナID> bash
+```
+
+### 6. コンテナの停止，その他の終了処理
+```bash
+<Ctrl+C>
+$ docker-compose down
+$ xhost -local:
 ```

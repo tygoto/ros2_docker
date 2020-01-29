@@ -16,7 +16,16 @@ RUN apt-get update \
     python3-sphinx \
     sudo
 
-RUN curl -sSL http://get.gazebosim.org | sh
+# RUN curl -sSL http://get.gazebosim.org | sh
+
+RUN sh -c 'echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list'
+RUN wget http://packages.osrfoundation.org/gazebo.key -O - | sudo apt-key add -
+RUN apt-get update \ 
+ && apt-get install -q -y --no-install-recommends \
+    gazebo9 \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
+
 
 RUN apt-get update \ 
  && apt-get install -q -y --no-install-recommends \
@@ -24,7 +33,9 @@ RUN apt-get update \
     ros-dashing-cartographer \
     ros-dashing-cartographer-ros \
     ros-dashing-navigation2 \
-    ros-dashing-nav2-bringup
+    ros-dashing-nav2-bringup \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
 
 RUN . /opt/ros/$ROS_DISTRO/setup.sh \
  && mkdir -p /turtlebot3_ws/src \

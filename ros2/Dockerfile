@@ -35,6 +35,11 @@ RUN echo "deb [arch=amd64,arm64] http://packages.ros.org/ros2/ubuntu `lsb_releas
 RUN apt-get update \ 
  && apt-get install -q -y --no-install-recommends \
     ros-dashing-desktop \
+ && apt-get clean \
+ && rm -rf /var/lib/apt/lists/*
+
+RUN apt-get update \ 
+ && apt-get install -q -y --no-install-recommends \
     python-rosdep \
     python3-argcomplete \
     python3-colcon-common-extensions \
